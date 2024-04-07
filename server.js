@@ -5,15 +5,20 @@ const person = require('./Models/Person')
 const menu = require('./Models/Menu')
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())
+require('dotenv').config()
 
 
 
+app.get('/', function(req,res) {
+    res.send('Welcome to Hotel')
+})
 
 const personRoutes = require('./routes/personroutes');
 app.use('/person', personRoutes);
 
-
 const menuRoutes = require('./routes/menuroutes');
 app.use('/menu', menuRoutes);
 
-app.listen(3000)
+const port = process.env.PORT || 3000
+
+app.listen(port)
