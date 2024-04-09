@@ -10,8 +10,7 @@ router.post('/', async (req, res) => {
         const response = await newMenu.save();
         console.log("data saved");
         res.status(200).json(response);
-    } catch (error) {
-       
+    } catch (error) {  
         res.status(500).json({ error: "Internal Server error" });
     }
 })

@@ -4,10 +4,7 @@ require('dotenv').config()
 
 const mongoURL = 'mongodb+srv://preetpatel3504:preet3504@nodehotelcluster.nvjckqh.mongodb.net/'
 
-mongoose.connect(mongoURL, {
-    useNewurlParser: true,
-    useUnifiedTopology: true
-})
+mongoose.connect(mongoURL)
 
 const db = mongoose.connection;
 
