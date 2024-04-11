@@ -17,7 +17,7 @@ router.post('/person', async (req, res) => {
 
 router.get('/person', async (req, res) => {
     try {
-        const data = await people.find();
+        const data = await person.find();
         console.log("data fetch");
         res.status(200).json(data);
     } catch (error) {
