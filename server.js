@@ -4,6 +4,7 @@ const db = require('./db')
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 require('dotenv').config()
+const port = process.env.PORT || 3000
 
 app.get('/', function(req,res) {
     res.send('Welcome to Hotel')
@@ -15,7 +16,6 @@ app.use('/person', personRoutes);
 const menuRoutes = require('./routes/menuroutes');
 app.use('/menu', menuRoutes);
 
-const port = process.env.PORT || 3000
 
 app.listen(port, ()=>{
     console.log(`Listing on ${port}`)
