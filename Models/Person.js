@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const bcrypt = require('bcrypt')
 
 //Create a schema
 const personschema = new mongoose.Schema({
@@ -7,12 +7,12 @@ const personschema = new mongoose.Schema({
         type: String,
         require: true
     },
-    age:{
+    age: {
         type: Number
     },
     work: {
         type: String,
-        enuf: ['chef','waiter','manager'],
+        enuf: ['chef', 'waiter', 'manager'],
         require: true
     },
     mobile: {
@@ -28,9 +28,40 @@ const personschema = new mongoose.Schema({
     salary: {
         type: Number,
         require: true
+    },
+    username: {
+        type: String,
+        require: true
+    },
+    password: {
+        type: String,
+        require: true
     }
 })
 
+personschema.pre('save', async function (next) {
+    const person = this;
+
+    if (!person.isModified('password')) return next();
+
+    try {
+        const salt = await bcrypt.genSalt(10);
+        const hasepassword = await bcrypt.hash(person.password, salt);
+        person.password = hasepassword;
+        next();
+    } catch (err) {
+        return next(err);
+    }
+})
+
+personschema.methods.comparepassword = async function (candidatePassword) {
+    try {
+        const ismatch = await bcrypt.compare(candidatePassword, this.password);
+        return ismatch
+    } catch (error) {
+        console.log("Error")
+    }
+}
 
 //Create a model of person
 
