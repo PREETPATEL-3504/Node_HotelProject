@@ -3,7 +3,7 @@ const router = express.Router();
 const person = require('../Models/Person')
 
 
-router.post('/person', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         const data = req.body
         const newPerson = new person(data);
@@ -15,7 +15,7 @@ router.post('/person', async (req, res) => {
     }
 })
 
-router.get('/person', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const data = await person.find();
         console.log("data fetch");
@@ -26,7 +26,7 @@ router.get('/person', async (req, res) => {
 
 })
 
-router.get('/person/:workType', async (req, res) => {
+router.get('/:workType', async (req, res) => {
     try {
         const workType = req.params.workType;
         if (workType == "chef" || workType == "waiter" || workType == "manager") {
@@ -40,7 +40,7 @@ router.get('/person/:workType', async (req, res) => {
 })
 
 
-router.put('/person/:personId', async (req, res) => {
+router.put('/:personId', async (req, res) => {
     try {
         const personId = req.params.personId;
         const updatepersonData = req.body;
@@ -62,7 +62,7 @@ router.put('/person/:personId', async (req, res) => {
     }
 })
 
-router.delete('/person/:personId', async (req, res) => {
+router.delete('/:personId', async (req, res) => {
     try {
         const personId = req.params.personId;
         const response = await person.findByIdAndDelete(personId)
