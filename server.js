@@ -15,10 +15,10 @@ app.get('/',localauth, function (req, res) {
 })
 
 const personRoutes = require('./routes/personroutes');
-app.use('/person',localauth, personRoutes);
+app.use('/person', personRoutes);
 
 const menuRoutes = require('./routes/menuroutes');
-app.use('/menu',localauth, menuRoutes);
+app.use('/menu', menuRoutes);
 
 const port = process.env.PORT || 3000
 
